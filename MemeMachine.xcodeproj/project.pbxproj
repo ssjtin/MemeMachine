@@ -8,20 +8,62 @@
 
 /* Begin PBXBuildFile section */
 		8E16EC332254C47000AEA599 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC322254C47000AEA599 /* AppDelegate.swift */; };
-		8E16EC352254C47000AEA599 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC342254C47000AEA599 /* ViewController.swift */; };
-		8E16EC382254C47000AEA599 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E16EC362254C47000AEA599 /* Main.storyboard */; };
+		8E16EC352254C47000AEA599 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC342254C47000AEA599 /* MainVC.swift */; };
 		8E16EC3A2254C47200AEA599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E16EC392254C47200AEA599 /* Assets.xcassets */; };
 		8E16EC3D2254C47200AEA599 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E16EC3B2254C47200AEA599 /* LaunchScreen.storyboard */; };
+		8E16EC452254D28400AEA599 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC442254D28400AEA599 /* SessionManager.swift */; };
+		8E16EC472254E0AA00AEA599 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC462254E0AA00AEA599 /* ImageObject.swift */; };
+		8E16EC4C2254EA7400AEA599 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC4B2254EA7400AEA599 /* MainViewModel.swift */; };
+		8E16EC4F22555CAE00AEA599 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC4E22555CAE00AEA599 /* ImageCell.swift */; };
+		8E16EC5622555D3F00AEA599 /* UIView_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5122555D3E00AEA599 /* UIView_Extensions.swift */; };
+		8E16EC5722555D3F00AEA599 /* ViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5222555D3F00AEA599 /* ViewController_Extensions.swift */; };
+		8E16EC5822555D3F00AEA599 /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5322555D3F00AEA599 /* String_Extension.swift */; };
+		8E16EC5922555D3F00AEA599 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5422555D3F00AEA599 /* UIColor_Extension.swift */; };
+		8E16EC5A22555D3F00AEA599 /* Layout_Extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5522555D3F00AEA599 /* Layout_Extensions .swift */; };
+		8E16EC5D225629DE00AEA599 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5C225629DE00AEA599 /* CustomTableView.swift */; };
+		8E16EC5F2256325B00AEA599 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC5E2256325B00AEA599 /* MainRouter.swift */; };
+		8E16EC622256ABCB00AEA599 /* MemeGeneratorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC612256ABCB00AEA599 /* MemeGeneratorVC.swift */; };
+		8E16EC642256B3A600AEA599 /* MemeGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC632256B3A600AEA599 /* MemeGeneratorViewModel.swift */; };
+		8E16EC662256D22A00AEA599 /* CaptionControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC652256D22A00AEA599 /* CaptionControlView.swift */; };
+		8E16EC682256D4CE00AEA599 /* ArrowPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC672256D4CE00AEA599 /* ArrowPad.swift */; };
+		8E16EC6A2256D8FF00AEA599 /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC692256D8FF00AEA599 /* UIImage_Extension.swift */; };
+		8E16EC6C2256DF0700AEA599 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC6B2256DF0700AEA599 /* UIButton_Extension.swift */; };
+		8E16EC6E2256EA1200AEA599 /* UITextField_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC6D2256EA1200AEA599 /* UITextField_Extensions.swift */; };
+		8E16EC702257458B00AEA599 /* UIImageView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC6F2257458B00AEA599 /* UIImageView_Extension.swift */; };
+		8E16EC7222574B9D00AEA599 /* MemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E16EC7122574B9D00AEA599 /* MemeView.swift */; };
+		D9C62A1861307DDF30DDAFCD /* Pods_MemeMachine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81878CFB400644C0EA8FE901 /* Pods_MemeMachine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21B1F356D40C7DA3AD7AC11F /* Pods-MemeMachine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeMachine.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemeMachine/Pods-MemeMachine.release.xcconfig"; sourceTree = "<group>"; };
+		36B12E1300363D55A950D3C7 /* Pods-MemeMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeMachine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemeMachine/Pods-MemeMachine.debug.xcconfig"; sourceTree = "<group>"; };
+		81878CFB400644C0EA8FE901 /* Pods_MemeMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E16EC2F2254C47000AEA599 /* MemeMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E16EC322254C47000AEA599 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E16EC342254C47000AEA599 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8E16EC372254C47000AEA599 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8E16EC342254C47000AEA599 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		8E16EC392254C47200AEA599 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E16EC3C2254C47200AEA599 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E16EC3E2254C47200AEA599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E16EC442254D28400AEA599 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		8E16EC462254E0AA00AEA599 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
+		8E16EC4B2254EA7400AEA599 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8E16EC4E22555CAE00AEA599 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		8E16EC5122555D3E00AEA599 /* UIView_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView_Extensions.swift; sourceTree = "<group>"; };
+		8E16EC5222555D3F00AEA599 /* ViewController_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController_Extensions.swift; sourceTree = "<group>"; };
+		8E16EC5322555D3F00AEA599 /* String_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
+		8E16EC5422555D3F00AEA599 /* UIColor_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
+		8E16EC5522555D3F00AEA599 /* Layout_Extensions .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Layout_Extensions .swift"; sourceTree = "<group>"; };
+		8E16EC5C225629DE00AEA599 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
+		8E16EC5E2256325B00AEA599 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		8E16EC612256ABCB00AEA599 /* MemeGeneratorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGeneratorVC.swift; sourceTree = "<group>"; };
+		8E16EC632256B3A600AEA599 /* MemeGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGeneratorViewModel.swift; sourceTree = "<group>"; };
+		8E16EC652256D22A00AEA599 /* CaptionControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionControlView.swift; sourceTree = "<group>"; };
+		8E16EC672256D4CE00AEA599 /* ArrowPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowPad.swift; sourceTree = "<group>"; };
+		8E16EC692256D8FF00AEA599 /* UIImage_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
+		8E16EC6B2256DF0700AEA599 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		8E16EC6D2256EA1200AEA599 /* UITextField_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField_Extensions.swift; sourceTree = "<group>"; };
+		8E16EC6F2257458B00AEA599 /* UIImageView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView_Extension.swift; sourceTree = "<group>"; };
+		8E16EC7122574B9D00AEA599 /* MemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C62A1861307DDF30DDAFCD /* Pods_MemeMachine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +83,8 @@
 			children = (
 				8E16EC312254C47000AEA599 /* MemeMachine */,
 				8E16EC302254C47000AEA599 /* Products */,
+				E4D84551C2D691914A52B419 /* Pods */,
+				E08ECE592252060FAA1349B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +100,105 @@
 			isa = PBXGroup;
 			children = (
 				8E16EC322254C47000AEA599 /* AppDelegate.swift */,
-				8E16EC342254C47000AEA599 /* ViewController.swift */,
-				8E16EC362254C47000AEA599 /* Main.storyboard */,
+				8E16EC602256361A00AEA599 /* Router */,
+				8E16EC5022555CB300AEA599 /* View */,
+				8E16EC492254EA5500AEA599 /* Manager */,
+				8E16EC482254EA4B00AEA599 /* Model */,
+				8E16EC4D2254EA9200AEA599 /* ViewModel */,
+				8E16EC4A2254EA5C00AEA599 /* ViewController */,
+				8E16EC5B22555D4800AEA599 /* Extension */,
 				8E16EC392254C47200AEA599 /* Assets.xcassets */,
 				8E16EC3B2254C47200AEA599 /* LaunchScreen.storyboard */,
 				8E16EC3E2254C47200AEA599 /* Info.plist */,
 			);
 			path = MemeMachine;
+			sourceTree = "<group>";
+		};
+		8E16EC482254EA4B00AEA599 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC462254E0AA00AEA599 /* ImageObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8E16EC492254EA5500AEA599 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC442254D28400AEA599 /* SessionManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		8E16EC4A2254EA5C00AEA599 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC342254C47000AEA599 /* MainVC.swift */,
+				8E16EC612256ABCB00AEA599 /* MemeGeneratorVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8E16EC4D2254EA9200AEA599 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC4B2254EA7400AEA599 /* MainViewModel.swift */,
+				8E16EC632256B3A600AEA599 /* MemeGeneratorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E16EC5022555CB300AEA599 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC4E22555CAE00AEA599 /* ImageCell.swift */,
+				8E16EC7122574B9D00AEA599 /* MemeView.swift */,
+				8E16EC652256D22A00AEA599 /* CaptionControlView.swift */,
+				8E16EC672256D4CE00AEA599 /* ArrowPad.swift */,
+				8E16EC5C225629DE00AEA599 /* CustomTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E16EC5B22555D4800AEA599 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC5522555D3F00AEA599 /* Layout_Extensions .swift */,
+				8E16EC6F2257458B00AEA599 /* UIImageView_Extension.swift */,
+				8E16EC6D2256EA1200AEA599 /* UITextField_Extensions.swift */,
+				8E16EC692256D8FF00AEA599 /* UIImage_Extension.swift */,
+				8E16EC5322555D3F00AEA599 /* String_Extension.swift */,
+				8E16EC5422555D3F00AEA599 /* UIColor_Extension.swift */,
+				8E16EC5122555D3E00AEA599 /* UIView_Extensions.swift */,
+				8E16EC5222555D3F00AEA599 /* ViewController_Extensions.swift */,
+				8E16EC6B2256DF0700AEA599 /* UIButton_Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		8E16EC602256361A00AEA599 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8E16EC5E2256325B00AEA599 /* MainRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		E08ECE592252060FAA1349B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				81878CFB400644C0EA8FE901 /* Pods_MemeMachine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4D84551C2D691914A52B419 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				36B12E1300363D55A950D3C7 /* Pods-MemeMachine.debug.xcconfig */,
+				21B1F356D40C7DA3AD7AC11F /* Pods-MemeMachine.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E16EC412254C47200AEA599 /* Build configuration list for PBXNativeTarget "MemeMachine" */;
 			buildPhases = (
+				A777AF6EC895B648C040293A /* [CP] Check Pods Manifest.lock */,
 				8E16EC2B2254C47000AEA599 /* Sources */,
 				8E16EC2C2254C47000AEA599 /* Frameworks */,
 				8E16EC2D2254C47000AEA599 /* Resources */,
+				8395FD7BEBB82AEC7F092362 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,33 +263,93 @@
 			files = (
 				8E16EC3D2254C47200AEA599 /* LaunchScreen.storyboard in Resources */,
 				8E16EC3A2254C47200AEA599 /* Assets.xcassets in Resources */,
-				8E16EC382254C47000AEA599 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8395FD7BEBB82AEC7F092362 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MemeMachine/Pods-MemeMachine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MemeMachine/Pods-MemeMachine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A777AF6EC895B648C040293A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MemeMachine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E16EC2B2254C47000AEA599 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E16EC352254C47000AEA599 /* ViewController.swift in Sources */,
+				8E16EC7222574B9D00AEA599 /* MemeView.swift in Sources */,
+				8E16EC5D225629DE00AEA599 /* CustomTableView.swift in Sources */,
+				8E16EC5722555D3F00AEA599 /* ViewController_Extensions.swift in Sources */,
+				8E16EC4C2254EA7400AEA599 /* MainViewModel.swift in Sources */,
+				8E16EC352254C47000AEA599 /* MainVC.swift in Sources */,
+				8E16EC622256ABCB00AEA599 /* MemeGeneratorVC.swift in Sources */,
+				8E16EC6C2256DF0700AEA599 /* UIButton_Extension.swift in Sources */,
+				8E16EC6A2256D8FF00AEA599 /* UIImage_Extension.swift in Sources */,
+				8E16EC642256B3A600AEA599 /* MemeGeneratorViewModel.swift in Sources */,
 				8E16EC332254C47000AEA599 /* AppDelegate.swift in Sources */,
+				8E16EC5F2256325B00AEA599 /* MainRouter.swift in Sources */,
+				8E16EC682256D4CE00AEA599 /* ArrowPad.swift in Sources */,
+				8E16EC5822555D3F00AEA599 /* String_Extension.swift in Sources */,
+				8E16EC472254E0AA00AEA599 /* ImageObject.swift in Sources */,
+				8E16EC6E2256EA1200AEA599 /* UITextField_Extensions.swift in Sources */,
+				8E16EC452254D28400AEA599 /* SessionManager.swift in Sources */,
+				8E16EC4F22555CAE00AEA599 /* ImageCell.swift in Sources */,
+				8E16EC702257458B00AEA599 /* UIImageView_Extension.swift in Sources */,
+				8E16EC5622555D3F00AEA599 /* UIView_Extensions.swift in Sources */,
+				8E16EC662256D22A00AEA599 /* CaptionControlView.swift in Sources */,
+				8E16EC5A22555D3F00AEA599 /* Layout_Extensions .swift in Sources */,
+				8E16EC5922555D3F00AEA599 /* UIColor_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8E16EC362254C47000AEA599 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8E16EC372254C47000AEA599 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8E16EC3B2254C47200AEA599 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,11 +479,13 @@
 		};
 		8E16EC422254C47200AEA599 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36B12E1300363D55A950D3C7 /* Pods-MemeMachine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 49H596ZHS6;
 				INFOPLIST_FILE = MemeMachine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,17 +493,19 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hoangluong.MemeMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		8E16EC432254C47200AEA599 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21B1F356D40C7DA3AD7AC11F /* Pods-MemeMachine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 49H596ZHS6;
 				INFOPLIST_FILE = MemeMachine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = hoangluong.MemeMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
