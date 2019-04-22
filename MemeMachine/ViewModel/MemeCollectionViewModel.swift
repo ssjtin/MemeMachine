@@ -11,7 +11,7 @@ import RxCocoa
 
 let imageCache = NSCache<NSString, UIImage>()
 
-class MainViewModel {
+class MemeCollectionViewModel {
     
     weak var tableView: UITableView? {
         didSet {
@@ -21,7 +21,7 @@ class MainViewModel {
     
     let disposeBag = DisposeBag()
     
-    let manager = SessionManager()
+    let sessionManager = SessionManager()
     
     var currentPage: Int = 0
     var isLoading: Bool = false
@@ -29,10 +29,9 @@ class MainViewModel {
     let images = BehaviorRelay<[ImageObject]>(value: [ImageObject]())
     
     let chosenImage = BehaviorRelay<UIImage?>(value: nil)
-    
-    init() {
+
+    func beginFetchingImages() {
         fetchImages(forPage: currentPage) { (images) in
-            print(images)
             self.images.accept(images)
         }
     }
@@ -62,13 +61,13 @@ class MainViewModel {
     
     func fetchImages(forPage page: Int, completion: @escaping ([ImageObject]) -> ()) {
 
-        manager.fetchImages(pageIndex: currentPage) { (images) in
+        sessionManager.fetchImages(pageIndex: currentPage) { (images) in
             completion(images)
         }
     }
     
     func fetchImage(atRow row: Int, completion: @escaping (UIImage) -> ()) {
-        manager.retrieveImage(using: images.value[row]) { (image, error) in
+        sessionManager.retrieveImage(using: images.value[row]) { (image, error) in
             if let image = image {
                 completion(image)
             }

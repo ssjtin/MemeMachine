@@ -10,10 +10,16 @@ import Alamofire
 import PromiseKit
 import SwiftyJSON
 
-let url = "http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=5&days="
+let popularUrl = "http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=5&days="
+
+let newUrl = "http://version1.api.memegenerator.net//Generators_Select_ByNew?pageIndex=0&pageSize=5"
+
 let API_KEY = "&apiKey=9f0661f0-6d69-469f-ac14-9ffe221a1562"
 
 class SessionManager {
+    
+    var urlString: String = popularUrl
+
     
     func retrieveImage(using object: ImageObject, completion: @escaping (UIImage?, Error?) -> ()) {
  
@@ -44,7 +50,7 @@ class SessionManager {
     
     func fetchImages(pageIndex: Int, completion: @escaping ([ImageObject]) -> ()) {
         
-        let baseUrlString = url + API_KEY
+        let baseUrlString = urlString + API_KEY
         let finalUrlString = baseUrlString.replacingOccurrences(of: "pageIndex=0", with: "pageIndex=\(pageIndex)")
         guard let url = URL(string: finalUrlString) else { return }
         

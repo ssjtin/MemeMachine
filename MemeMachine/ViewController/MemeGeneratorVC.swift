@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FacebookShare
 
 class MemeGeneratorVC: UIViewController {
     
@@ -21,6 +22,7 @@ class MemeGeneratorVC: UIViewController {
     let disposeBag = DisposeBag()
     
     var captionControl: CaptionControlView!
+    var saveShareView: SaveShareView?
     
     let memeView = MemeView(image: nil)
     
@@ -57,11 +59,10 @@ class MemeGeneratorVC: UIViewController {
             guard self.viewModel.isEditingBottomCaption.value == true else { return }
             let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
             let adjustment = self.view.frame.maxY - height! - self.memeView.frame.maxY
-            print(adjustment)
             if adjustment < 0 {
                 let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
                 UIView.animate(withDuration: duration!, animations: {
-                    self.memeViewCenterYConstraint?.constant = adjustment
+                    self.memeViewCenterYConstraint?.constant = adjustment + (self.memeViewOffset ?? 0.0)
                     self.view.layoutIfNeeded()
                 })
             }
@@ -72,7 +73,7 @@ class MemeGeneratorVC: UIViewController {
             if self.memeViewCenterYConstraint?.constant != 0 {
                 let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
                 UIView.animate(withDuration: duration!, animations: {
-                    self.memeViewCenterYConstraint?.constant = 0
+                    self.memeViewCenterYConstraint?.constant = self.memeViewOffset ?? 0
                     self.view.layoutIfNeeded()
                 })
             }
@@ -82,7 +83,7 @@ class MemeGeneratorVC: UIViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
     
@@ -95,6 +96,7 @@ class MemeGeneratorVC: UIViewController {
     }
     
     var memeViewCenterYConstraint: NSLayoutConstraint?
+    var memeViewOffset: CGFloat?
     
     func configureMemeView() {
         let imageRatio = memeImage.size.height/memeImage.size.width
@@ -102,8 +104,19 @@ class MemeGeneratorVC: UIViewController {
         
         view.addSubviewUsingAutoLayout(memeView)
         
+        let viewHeight = screenWidth * imageRatio
+        let captionControlMaxY: CGFloat = 88 + 120
+        let memeViewMinY = view.frame.midY - viewHeight/2
+        let spacing = memeViewMinY - captionControlMaxY
+        
+        if spacing < 0 {
+            memeViewOffset = -spacing
+        }
         memeView.centerXAnchor.constrain(to: view.centerXAnchor)
         memeViewCenterYConstraint = memeView.centerYAnchor.constrain(to: view.centerYAnchor)
+        if let offset = memeViewOffset {
+            memeViewCenterYConstraint?.constant = offset
+        }
         memeView.widthAnchor.constrain(to: screenWidth)
         memeView.heightAnchor.constrain(to: screenWidth * imageRatio)
         
@@ -113,6 +126,45 @@ class MemeGeneratorVC: UIViewController {
     func configureCaptionControlView() {
         captionControl = CaptionControlView(frame: CGRect(x: 0, y: 88, width: view.frame.width, height: 120))
         view.addSubview(captionControl)
+    }
+    
+    func showSaveShareView() {
+        guard let memeImage = viewModel.memeImage.value else { return }
+        
+        saveShareView = SaveShareView(frame: CGRect(x: 0, y: 100, width: 300, height: 200))
+        view.addSubview(saveShareView!)
+        
+        let sharePhoto = Photo(image: memeImage, userGenerated: true)
+        var content = PhotoShareContent()
+        content.photos = [sharePhoto]
+        
+        saveShareView?.shareButton.content = content
+        saveShareView?.sendMessageButton.content = content
+        
+        saveShareView?.saveButton.rx.tap.subscribe(onNext: {
+            [unowned self] _ in
+            UIImageWriteToSavedPhotosAlbum(memeImage, self, #selector(self.image), nil)
+    
+        }).disposed(by: disposeBag)
+        
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func handleDiscardMeme() {
+        
+        let alert = UIAlertController(title: "Finish without saving your fresh meme?", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        }
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+        
     }
     
     func moveCaption(inDirection direction: Direction) {
@@ -156,57 +208,25 @@ class MemeGeneratorVC: UIViewController {
             self.memeView.bottomCaption.textColor = setting.fontcolor
         }).disposed(by: disposeBag)
         
-        //Adjust font color
+        //Adjust text
         captionControl.whiteFontButton.rx.tap.subscribe(onNext: {
             [unowned self] in
-            if self.viewModel.isEditingTopCaption.value == true {
-                var currentSettings = self.viewModel.topCaptionSettings.value
-                currentSettings.fontcolor = .white
-                self.viewModel.topCaptionSettings.accept(currentSettings)
-            } else if self.viewModel.isEditingBottomCaption.value == true {
-                var currentSettings = self.viewModel.bottomCaptionSettings.value
-                currentSettings.fontcolor = .white
-                self.viewModel.bottomCaptionSettings.accept(currentSettings)
-            }
+            self.viewModel.applyChanges(for: .SetWhite)
         }).disposed(by: disposeBag)
         
         captionControl.blackFontButton.rx.tap.subscribe(onNext: {
             [unowned self] in
-            if self.viewModel.isEditingTopCaption.value == true {
-                var currentSettings = self.viewModel.topCaptionSettings.value
-                currentSettings.fontcolor = .black
-                self.viewModel.topCaptionSettings.accept(currentSettings)
-            } else if self.viewModel.isEditingBottomCaption.value == true {
-                var currentSettings = self.viewModel.bottomCaptionSettings.value
-                currentSettings.fontcolor = .black
-                self.viewModel.bottomCaptionSettings.accept(currentSettings)
-            }
+            self.viewModel.applyChanges(for: .SetBlack)
         }).disposed(by: disposeBag)
         
         captionControl.increaseFontButton.rx.tap.subscribe(onNext: {
             [unowned self] in
-            if self.viewModel.isEditingTopCaption.value == true {
-                var currentSettings = self.viewModel.topCaptionSettings.value
-                currentSettings.fontSize += 2
-                self.viewModel.topCaptionSettings.accept(currentSettings)
-            } else if self.viewModel.isEditingBottomCaption.value == true {
-                var currentSettings = self.viewModel.bottomCaptionSettings.value
-                currentSettings.fontSize += 2
-                self.viewModel.bottomCaptionSettings.accept(currentSettings)
-            }
+            self.viewModel.applyChanges(for: .IncreaseFont)
         }).disposed(by: disposeBag)
         
         captionControl.decreaseFontButton.rx.tap.subscribe(onNext: {
             [unowned self] in
-            if self.viewModel.isEditingTopCaption.value == true {
-                var currentSettings = self.viewModel.topCaptionSettings.value
-                currentSettings.fontSize -= 2
-                self.viewModel.topCaptionSettings.accept(currentSettings)
-            } else if self.viewModel.isEditingBottomCaption.value == true {
-                var currentSettings = self.viewModel.bottomCaptionSettings.value
-                currentSettings.fontSize -= 2
-                self.viewModel.bottomCaptionSettings.accept(currentSettings)
-            }
+            self.viewModel.applyChanges(for: .DecreaseFont)
         }).disposed(by: disposeBag)
         
         //Move caption controls
@@ -233,34 +253,14 @@ class MemeGeneratorVC: UIViewController {
         //Observe currently editing caption
         viewModel.isEditingTopCaption.asObservable().subscribe(onNext: {
             [unowned self] isEditing in
-            if isEditing == true {
-                self.captionControl.topCaptionControlButton.isEnabled = false
-                self.captionControl.topCaptionControlButton.backgroundColor = UIColor.gray
-                self.memeView.topCaption.layer.borderColor = UIColor.black.cgColor
-                self.memeView.topCaption.isEnabled = true
-                self.memeView.topCaption.becomeFirstResponder()
-            } else {
-                self.captionControl.topCaptionControlButton.isEnabled = true
-                self.captionControl.topCaptionControlButton.backgroundColor = UIColor.black
-                self.memeView.topCaption.layer.borderColor = UIColor.clear.cgColor
-                self.memeView.topCaption.isEnabled = false
-            }
+            self.memeView.set(caption: self.memeView.topCaption, toEnabled: isEditing)
+            self.captionControl.topCaptionControlButton.setEnabled(to: !isEditing)
         }).disposed(by: disposeBag)
         
         viewModel.isEditingBottomCaption.asObservable().subscribe(onNext: {
             [unowned self] isEditing in
-            if isEditing == true {
-                self.captionControl.bottomCaptionControlButton.backgroundColor = UIColor.gray
-                self.captionControl.bottomCaptionControlButton.isEnabled = false
-                self.memeView.bottomCaption.layer.borderColor = UIColor.black.cgColor
-                self.memeView.bottomCaption.isEnabled = true
-                self.memeView.bottomCaption.becomeFirstResponder()
-            } else {
-                self.captionControl.bottomCaptionControlButton.isEnabled = true
-                self.captionControl.bottomCaptionControlButton.backgroundColor = UIColor.black
-                self.memeView.bottomCaption.layer.borderColor = UIColor.clear.cgColor
-                self.memeView.bottomCaption.isEnabled = false
-            }
+            self.memeView.set(caption: self.memeView.bottomCaption, toEnabled: isEditing)
+            self.captionControl.bottomCaptionControlButton.setEnabled(to: !isEditing)
         }).disposed(by: disposeBag)
         
         //Controls for selecting captions
@@ -279,15 +279,14 @@ class MemeGeneratorVC: UIViewController {
         //Save meme
         navigationItem.rightBarButtonItem!.rx.tap.subscribe(onNext: {
             [unowned self] in
-            
             self.viewModel.saveMeme(from: self.memeView)
             self.memeView.image = self.viewModel.memeImage.value
-            
+            self.showSaveShareView()
         }).disposed(by: disposeBag)
         
         navigationItem.leftBarButtonItem!.rx.tap.subscribe(onNext: {
             [unowned self] in
-            self.dismiss(animated: true, completion: nil)
+            self.handleDiscardMeme()
         }).disposed(by: disposeBag)
         
     }

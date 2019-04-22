@@ -40,8 +40,6 @@ class MemeView: UIImageView {
         super.init(image: image)
         
         contentMode = .scaleAspectFill
-        layer.borderWidth = 5
-        layer.borderColor = UIColor.red.cgColor
         isUserInteractionEnabled = true
         
         self.addSubviewUsingAutoLayout(topCaption, bottomCaption)
@@ -54,6 +52,16 @@ class MemeView: UIImageView {
         bottomCaption.trailingAnchor.constrain(to: self.trailingAnchor)
         bottomCaption.leadingAnchor.constrain(to: self.leadingAnchor)
         bottomCaption.heightAnchor.constrain(to: 75)
+        
+    }
+    
+    func set(caption: UITextField, toEnabled state: Bool) {
+        caption.layer.borderColor = state ? UIColor.black.cgColor : UIColor.clear.cgColor
+        caption.isEnabled = state
+        
+        if state == true {
+            caption.becomeFirstResponder()
+        }
         
     }
     

@@ -10,6 +10,14 @@ import RxCocoa
 
 class MemeGeneratorViewModel {
     
+    enum TextAdjustment {
+        case IncreaseFont, DecreaseFont, SetWhite, SetBlack
+    }
+    
+    enum Caption {
+        case Top, Bottom
+    }
+    
     struct CaptionSettings {
         var fontSize: CGFloat = 30
         var fontcolor: UIColor = .black
@@ -33,6 +41,40 @@ class MemeGeneratorViewModel {
         memeImage.accept(view.getImageFromVisibleContext())
     }
     
+    func applyChanges(for adjustment: TextAdjustment) {
+        
+        var currentSettings: CaptionSettings
+        var editingCaption: Caption
+        
+        if isEditingTopCaption.value {
+            currentSettings = topCaptionSettings.value
+            editingCaption = .Top
+        } else if isEditingBottomCaption.value {
+            currentSettings = bottomCaptionSettings.value
+            editingCaption = .Bottom
+        } else { return }
+        
+        switch adjustment {
+            
+        case .IncreaseFont:
+            currentSettings.fontSize += 2
+        case .DecreaseFont:
+            guard currentSettings.fontSize > 1 else { return }
+            currentSettings.fontSize -= 2
+        case .SetBlack:
+            guard currentSettings.fontcolor != .black else { return }
+            currentSettings.fontcolor = .black
+        case .SetWhite:
+            guard currentSettings.fontcolor != .white else { return }
+            currentSettings.fontcolor = .white
+        }
+        
+        if editingCaption == .Top {
+            topCaptionSettings.accept(currentSettings)
+        } else {
+            bottomCaptionSettings.accept(currentSettings)
+        }
+    }
     
     func endEditing() {
         isEditingTopCaption.accept(false)

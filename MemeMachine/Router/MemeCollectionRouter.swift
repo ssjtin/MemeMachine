@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MainRouter {
+class MemeCollectionRouter {
 
-    unowned var viewModel: MainViewModel
+    unowned var viewModel: MemeCollectionViewModel
     
-    init(viewModel: MainViewModel) {
+    init(viewModel: MemeCollectionViewModel) {
         self.viewModel = viewModel
     }
     

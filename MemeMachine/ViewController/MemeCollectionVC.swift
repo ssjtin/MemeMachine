@@ -10,12 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MainVC: UITableViewController {
+class MemeCollectionVC: UITableViewController {
     
     let cellIdentifier = "imageCell"
     
-    let viewModel = MainViewModel()
-    var router: MainRouter!
+    let viewModel = MemeCollectionViewModel()
+    
+    var router: MemeCollectionRouter!
     
     let disposeBag = DisposeBag()
     
@@ -23,7 +24,7 @@ class MainVC: UITableViewController {
         super.viewDidLoad()
     
         view.backgroundColor = UIColor.white
-        router = MainRouter(viewModel: viewModel)
+        router = MemeCollectionRouter(viewModel: viewModel)
         
         configureTableView()
         bindViewModel()
@@ -46,7 +47,6 @@ class MainVC: UITableViewController {
         
         viewModel.images.asObservable().subscribe(onNext: {
             [unowned self] _ in
-            print("reloading")
             self.tableView.reloadData()
         }).disposed(by: disposeBag)
         
