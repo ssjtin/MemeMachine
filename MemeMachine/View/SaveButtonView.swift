@@ -25,6 +25,8 @@ class SaveButtonView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = UIColor.blue
+        
         addSubviewUsingAutoLayout(iconView, titleLabel)
         iconView.topAnchor.constrain(to: self.topAnchor)
         iconView.leadingAnchor.constrain(to: self.leadingAnchor)

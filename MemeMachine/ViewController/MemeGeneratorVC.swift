@@ -131,7 +131,8 @@ class MemeGeneratorVC: UIViewController {
     func showSaveShareView() {
         guard let memeImage = viewModel.memeImage.value else { return }
         
-        saveShareView = SaveShareView(frame: CGRect(x: 0, y: 100, width: 300, height: 200))
+        saveShareView = SaveShareView(frame: CGRect(x: view.frame.midX - 200, y: view.frame.midY - 100, width: 300, height: 100))
+        
         view.addSubview(saveShareView!)
         
         let sharePhoto = Photo(image: memeImage, userGenerated: true)
@@ -141,16 +142,19 @@ class MemeGeneratorVC: UIViewController {
         saveShareView?.shareButton.content = content
         saveShareView?.sendMessageButton.content = content
         
-        saveShareView?.saveButton.rx.tap.subscribe(onNext: {
+        let saveGesture = UITapGestureRecognizer()
+        saveShareView?.saveButton.addGestureRecognizer(saveGesture)
+        
+        saveGesture.rx.event.subscribe(onNext: {
             [unowned self] _ in
             UIImageWriteToSavedPhotosAlbum(memeImage, self, #selector(self.image), nil)
-    
         }).disposed(by: disposeBag)
         
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        navigationController?.popToRootViewController(animated: true)
+        print("popping to root")
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func handleDiscardMeme() {

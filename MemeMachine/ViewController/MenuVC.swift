@@ -20,12 +20,25 @@ class MenuVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        configureViews()
+        configureNavigationBar()
+        configureCollectionView()
+        bindViewModel()
+    }
+    
+    func configureViews() {
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = UIColor.clear
+        navigationItem.title = "Meme Machine"
+    }
+    
+    func configureCollectionView() {
+        collectionView.backgroundColor = UIColor.black
         collectionView.register(MenuButtonCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.delegate = self
         collectionView.dataSource = nil
-        
-        bindViewModel()
     }
 
     func bindViewModel() {
@@ -66,7 +79,7 @@ extension MenuVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 150, left: 25, bottom: 150, right: 25)
+        return UIEdgeInsets(top: 250, left: 25, bottom: 150, right: 25)
     }
     
 }
